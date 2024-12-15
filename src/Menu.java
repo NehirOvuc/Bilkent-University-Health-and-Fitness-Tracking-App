@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.io.File;
 
 public class Menu {
-    private JComboBox comboBox1;
     private JCheckBox checkBox1;
     private JTextField valueTextField;
     private JPanel panel1;
@@ -36,6 +35,7 @@ public class Menu {
     private JLabel mealCalc5;
     private JLabel navRes;
     private JLabel HomeLogo;
+    private JButton logOutButton;
 
     public Menu(String resName) {
         TXThandler th = new TXThandler(resName);
@@ -115,6 +115,13 @@ public class Menu {
                 MenuFrame.setVisible(false);
 
                 new Login();
+            }
+        });
+        logOutButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MenuFrame.setVisible(false);
+                new UserLogin(MenuFrame);
             }
         });
     }

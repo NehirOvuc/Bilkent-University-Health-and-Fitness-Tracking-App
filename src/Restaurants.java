@@ -23,6 +23,7 @@ public class Restaurants {
         restaurantsFrame.setContentPane(panel1);  // Set the panel as the content pane of the frame
         restaurantsFrame.setSize(900, 900);
         restaurantsFrame.setLocationRelativeTo(null);  // Center the frame on the screen
+        restaurantsFrame.pack();
         restaurantsFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // Disable resizing
         restaurantsFrame.setResizable(false);
