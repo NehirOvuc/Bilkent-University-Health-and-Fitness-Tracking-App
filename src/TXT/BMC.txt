@@ -1,0 +1,6 @@
+BMC#Bilkent Main Cafetaria
+meal1#Corn Soup#Corn kernels, onion, garlic, butter or olive oil, vegetable broth, salt and pepper, milk or cream (optional), flour (optional)#90
+meal2#Grilled Chicken with Mashed Potatoes#Chicken breast or thighs, olive oil, salt, pepper, spices (paprika, thyme), potatoes, butter, milk#165
+meal3#Vegan Stuffed Meatballs#Bulgur wheat, spinach, onion, olive oil, tomato paste, tomatoes, green peppers, spices (cumin, paprika), salt #180
+meal4#Mediterranean Salad#Tomatoes, cucumbers, red onion, Kalamata olives, feta cheese (optional), fresh parsley, olive oil, lemon juice, salt and pepper#70
+meal5#Dragon Fruit Dessert#Dragon fruit, sugar or honey (optional), lemon or lime juice, coconut flakes (optional)#60

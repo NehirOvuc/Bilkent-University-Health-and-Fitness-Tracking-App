@@ -1,0 +1,6 @@
+Kirac#Kirac Cafe
+meal1#Chicken Schnitzel #Tavuk Şinitzel, ingredients: chicken breast, breadcrumbs, spices, frying oil / malzemeler: tavuk göğsü, galeta unu, baharatlar, kızartma yağı#210
+meal2#Vegetable Lasagna# Sebzeli Lazanya, ingredients: pasta, zucchini, eggplant, béchamel sauce, cheese / malzemeler: makarna, kabak, patlıcan, beşamel sos, peynir#180
+meal3#Lentil Soup#Mercimek Çorbası, ingredients: lentils, onion, carrot, spices, olive oil / malzemeler: mercimek, soğan, havuç, baharatlar, zeytinyağı#110
+meal4#Grilled Fish# Izgara Balık, ingredients: fish fillet, lemon, herbs, olive oil / malzemeler: balık fileto, limon, otlar, zeytinyağı#170
+meal5#Rice Pilaf#Pilav, ingredients: rice, butter, chicken stock / malzemeler: pirinç, tereyağı, tavuk suyu#130

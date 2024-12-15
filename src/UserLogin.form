@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="UserLogin">
+  <grid id="27dc6" binding="userLoginPanel" layout-manager="GridLayoutManager" row-count="12" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="10" left="10" bottom="10" right="10"/>
+    <constraints>
+      <xy x="20" y="20" width="553" height="572"/>
+    </constraints>
+    <properties>
+      <background color="-2434331"/>
+      <enabled value="true"/>
+      <foreground color="-14614435"/>
+    </properties>
+    <border type="none"/>
+    <children>
+      <component id="bb72e" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="4" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="Cambria" size="34" style="1"/>
+          <foreground color="-14614435"/>
+          <text value="User Login"/>
+        </properties>
+      </component>
+      <component id="12020" class="javax.swing.JTextField" binding="tFUserName">
+        <constraints>
+          <grid row="4" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-2104859"/>
+          <caretColor color="-5262410"/>
+          <font name="Cambria" size="26"/>
+          <foreground color="-16777216"/>
+          <opaque value="true"/>
+          <selectionColor color="-4013363"/>
+        </properties>
+      </component>
+      <component id="ca6ed" class="javax.swing.JPasswordField" binding="pFPassword">
+        <constraints>
+          <grid row="6" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-2104859"/>
+          <caretColor color="-5262410"/>
+          <editable value="true"/>
+          <enabled value="true"/>
+          <font name="Cambria" size="26"/>
+          <foreground color="-16777216"/>
+          <horizontalAlignment value="10"/>
+          <opaque value="true"/>
+          <selectionColor color="-4013363"/>
+          <text value=""/>
+        </properties>
+      </component>
+      <component id="79bfe" class="javax.swing.JButton" binding="loginButton" default-binding="true">
+        <constraints>
+          <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-14614435"/>
+          <font name="Cambria" size="20" style="0"/>
+          <foreground color="-394241"/>
+          <opaque value="true"/>
+          <text value="     Login     "/>
+        </properties>
+      </component>
+      <component id="c9420" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="10" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="Cambria" size="20"/>
+          <foreground color="-16777216"/>
+          <text value="You don't have an account?"/>
+        </properties>
+      </component>
+      <vspacer id="fca5f">
+        <constraints>
+          <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </vspacer>
+      <vspacer id="8ed34">
+        <constraints>
+          <grid row="9" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </vspacer>
+      <component id="fc8fc" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="3" column="0" row-span="1" col-span="4" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="Cambria" size="20" style="0"/>
+          <foreground color="-16777216"/>
+          <text value="User Name "/>
+        </properties>
+      </component>
+      <component id="2fd5d" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="5" column="0" row-span="1" col-span="4" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="Cambria" size="20" style="0"/>
+          <foreground color="-16777216"/>
+          <text value="Password"/>
+        </properties>
+      </component>
+      <vspacer id="af99b">
+        <constraints>
+          <grid row="11" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </vspacer>
+      <vspacer id="a1ac3">
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </vspacer>
+      <component id="e7b31" class="javax.swing.JButton" binding="registerButton" default-binding="true">
+        <constraints>
+          <grid row="10" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-14614435"/>
+          <font name="Cambria" size="20" style="0"/>
+          <foreground color="-394241"/>
+          <opaque value="true"/>
+          <text value="Register"/>
+        </properties>
+      </component>
+      <vspacer id="73b00">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </vspacer>
+    </children>
+  </grid>
+</form>

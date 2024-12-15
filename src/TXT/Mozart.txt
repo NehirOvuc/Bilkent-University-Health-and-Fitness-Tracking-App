@@ -1,0 +1,6 @@
+Mozart#Mozart Cafe
+meal1#Sezar Salata /Caesar Salad#Salata Karışımı,Tavuk, Kaşar, Kuruton, Mısır,Havuç, Domates,Salatalık,Sezar Sos, Rus Salatası.Green Mix,Chicken(Boiled,Grilled or Schnitzel), Kashar Cheese,Corn,Carrot,Tomato,Cucumber, Russian Salad,Caesar sauce,Croutons#200
+meal2#Thai Bonfile Salata/Thai Beef Salad#Özel Soslanmış Dana BonfileSalata Karışımı,Roka,Kırmızı lahana,Baby Corn,Soya Filizi,Havuç. Marinated Beef, Green Mix, Arugula Leaves,Red Cabbage, Baby Corn,Carrot,Soybean Sprout#272
+meal3#Falafel Salata/ Falafel Salad#Salata Karışımı,Roka, Falafel, Humus çeşitleri( Avokado ve Kapya), Greçka, Mısır, Kırmızı Biber, Cherry Domates,Yoğurt Sos. Green Mix,Falafel,Arugula Leaves,Hummus(Capia Pepper and Avocado),Buckwheat ,Corn,Capia Pepper,Tomato, Yogurt Sauce#253
+meal4#Enginar Kalbi Salatası/Artichoke Heart Salad#Salata Karışımı, Enginar Kalbi,Kinoa,Kurutulmuş Domates, Cherry Domates, Portakal,Lor Peynir/Green Mix,Quinoa,Artichoke Heart, Dried Tomato, Curd Cheese,Cherry Tomato,Orange#184
+meal5#Brokoli Salata/ Broccoli Salad#Salata Karışımı,Brokoli,Tatlı Patates, Nohut, Kinoa,Mısır,Lor Peynir/Green Mix,Broccoli, Sweet Potato, Chickpeas,Quinoa, Corn, Cured Cheese#82
