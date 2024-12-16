@@ -21,11 +21,9 @@ public class Restaurants {
         // Create a JFrame for the Restaurants page
         JFrame restaurantsFrame = new JFrame("Restaurants");
         restaurantsFrame.setContentPane(panel1);  // Set the panel as the content pane of the frame
-        restaurantsFrame.setSize(900, 900);
+        restaurantsFrame.setSize(850, 700);
         restaurantsFrame.setLocationRelativeTo(null);  // Center the frame on the screen
-        restaurantsFrame.pack();
         restaurantsFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        // Disable resizing
         restaurantsFrame.setResizable(true);
         // Show the Restaurants frame
         restaurantsFrame.setVisible(true);

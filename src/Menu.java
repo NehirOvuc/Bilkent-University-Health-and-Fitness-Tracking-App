@@ -57,7 +57,7 @@ public class Menu {
         // Create a JFrame for the Restaurants page
         JFrame MenuFrame = new JFrame("Menu");
         MenuFrame.setContentPane(panel1);  // Set the panel as the content pane of the frame
-        MenuFrame.setSize(850, 900);
+        MenuFrame.setSize(850, 700);
         MenuFrame.setLocationRelativeTo(null);  // Center the frame on the screen
         MenuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
