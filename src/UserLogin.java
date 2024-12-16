@@ -30,7 +30,7 @@ public class UserLogin extends JDialog {
 
                 if(user != null) {
                     //TODO: send the user to the class
-                    new Restaurants();
+                    new HomePage();
                     dispose();
                 }
                 else{

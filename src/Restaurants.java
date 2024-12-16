@@ -62,7 +62,7 @@ public class Restaurants {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 restaurantsFrame.setVisible(false);
-                new Login();
+                new HomePage();
             }
         });
         logOutButton.addActionListener(new ActionListener() {

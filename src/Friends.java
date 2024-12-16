@@ -67,7 +67,7 @@ public class Friends extends JFrame {
         JPanel blueLine = new JPanel();
         blueLine.setBackground(new Color(0, 0, 98));
         blueLine.setPreferredSize(new Dimension(900, 4));
-       // mainPanel.add(blueLine, BorderLayout.SOUTH);
+        // mainPanel.add(blueLine, BorderLayout.SOUTH);
 
         friendsPage.add(mainPanel);
         friendsPage.setVisible(true);
@@ -117,3 +117,4 @@ public class Friends extends JFrame {
             }
         });
     }
+}
