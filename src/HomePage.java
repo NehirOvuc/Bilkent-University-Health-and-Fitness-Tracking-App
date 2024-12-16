@@ -26,13 +26,6 @@ public class HomePage {
         homeFrame.setResizable(true);
         homeFrame.getContentPane().setBackground(Color.WHITE);
 
-        HomeLogo.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                homeFrame.setVisible(false);
-                new Login();
-            }
-        });
 
         restaurantLabel.addMouseListener(new MouseAdapter() {
             @Override

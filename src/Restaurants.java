@@ -26,7 +26,7 @@ public class Restaurants {
         restaurantsFrame.pack();
         restaurantsFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // Disable resizing
-        restaurantsFrame.setResizable(false);
+        restaurantsFrame.setResizable(true);
         // Show the Restaurants frame
         restaurantsFrame.setVisible(true);
 

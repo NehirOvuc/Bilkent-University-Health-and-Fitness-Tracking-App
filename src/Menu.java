@@ -77,7 +77,7 @@ public class Menu {
         configureTextArea(mealDesc5);
 
         // Disable resizing
-        MenuFrame.setResizable(false);
+        MenuFrame.setResizable(true);
 
         // Show the Restaurants frame
         MenuFrame.setVisible(true);
@@ -114,7 +114,7 @@ public class Menu {
                 super.mouseClicked(e);
                 MenuFrame.setVisible(false);
 
-                new Login();
+                new UserLogin(MenuFrame);
             }
         });
         logOutButton.addActionListener(new ActionListener() {

@@ -77,7 +77,7 @@ public class Friends extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 friendsPage.setVisible(false);
-                new Login();
+                new UserLogin(friendsPage);
             }
         });
 
