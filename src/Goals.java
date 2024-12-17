@@ -39,7 +39,7 @@ public class Goals {
             @Override
             public void mouseClicked(MouseEvent e) {
                 frame.setVisible(false); // Goals ekranını kapat
-                new Login(); // Login ekranını aç
+                new UserLogin(frame); // Login ekranını aç
             }
         });
 
