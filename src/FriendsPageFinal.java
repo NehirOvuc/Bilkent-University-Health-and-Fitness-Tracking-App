@@ -14,11 +14,11 @@ public class FriendsPageFinal extends JFrame {
     private JButton challengeButton;
     private JLabel restaurantButton;
     private JLabel fitnessButton;
-    private JLabel goalsButton;
     private JButton showFriendsButton;
     private JTextField friendIDTextField;
     private JTextArea friendsListArea;
     private JLabel userIDLabel;
+    private JLabel goalsButton;
 
     private User currentUser; // Logged-in user
     private int userID;       // User's ID retrieved from the database
@@ -35,7 +35,7 @@ public class FriendsPageFinal extends JFrame {
         // Initialize components
         setTitle("Friend Manager");
         setContentPane(friendManagerPanel);
-        setSize(500, 400);
+        setSize(800, 800);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
@@ -241,7 +241,7 @@ public class FriendsPageFinal extends JFrame {
             // Display the list of friends in the text area
             StringBuilder friendsList = new StringBuilder("Your Friends:\n");
             while (rs.next()) {
-                friendsList.append(rs.getString("userName")).append("\n");
+                friendsList.append("Friend Name: " + rs.getString("userName") ).append("\n");
             }
 
             friendsListArea.setText(friendsList.toString());
