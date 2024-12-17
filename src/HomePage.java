@@ -15,9 +15,11 @@ public class HomePage {
     private JLabel fitnessLabel;
     private JLabel goalsLabel;
     private JPanel homePanel;
+    private User user;
 
-    public HomePage() {
+    public HomePage(User user) {
 
+        this.user = user;
         JFrame homeFrame = new JFrame("Home Page");
         homeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         homeFrame.setContentPane(homePanel);
@@ -32,7 +34,7 @@ public class HomePage {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 homeFrame.setVisible(false);
-                new Restaurants();
+                new Restaurants(user);
             }
         });
 
@@ -50,7 +52,7 @@ public class HomePage {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                //new Goals();
+                new FriendsPageFinal(user);
             }
         });
 
@@ -65,7 +67,7 @@ public class HomePage {
             @Override
             public void actionPerformed(ActionEvent e) {
                 homeFrame.setVisible(false);
-                new Restaurants();
+                new Restaurants(user);
             }
         });
         fitnessButton.addActionListener(new ActionListener() {

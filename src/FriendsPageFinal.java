@@ -67,7 +67,7 @@ public class FriendsPageFinal {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 friendsFrame.setVisible(false);
-                new HomePage();
+                new HomePage(currentUser);
             }
         });
 
@@ -104,7 +104,7 @@ public class FriendsPageFinal {
             @Override
             public void mouseClicked(MouseEvent e) {
                 friendsFrame.setVisible(false);
-                new Restaurants();
+                new Restaurants(user);
             }
         });
 

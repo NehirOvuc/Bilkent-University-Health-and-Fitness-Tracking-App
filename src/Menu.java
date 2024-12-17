@@ -38,8 +38,10 @@ public class Menu {
     private JButton logOutButton;
     private JButton filterButton;
     private int mealNum;
+    private User user;
 
-    public Menu(String resName) {
+    public Menu(String resName, User user) {
+        this.user = user;
         mealNum = 5;
         TXThandler th = new TXThandler(resName);
         ArrayList<Meal> meals = th.meals;
@@ -90,7 +92,7 @@ public class Menu {
                 super.mouseClicked(e);
                 MenuFrame.setVisible(false);
 
-                new Restaurants();
+                new Restaurants(user);
             }
         });
         HomeLogo.addMouseListener(new MouseAdapter() {
@@ -99,7 +101,7 @@ public class Menu {
                 super.mouseClicked(e);
                 MenuFrame.setVisible(false);
 
-                new HomePage();
+                new HomePage(user);
             }
         });
         logOutButton.addActionListener(new ActionListener() {
@@ -234,11 +236,5 @@ public class Menu {
         textArea.setPreferredSize(new Dimension(300, 150)); // Set preferred size
     }
 
-    public static void main(String[] args) {
-        if (args.length > 0) {
-            SwingUtilities.invokeLater(() -> new Menu(args[0]));
-        } else {
-            System.err.println("Restaurant name argument is missing!");
-        }
-    }
+
 }

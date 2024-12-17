@@ -14,10 +14,12 @@ public class Restaurants {
     private JButton menuButtonKirac;
     private JLabel HomeLogo;
     private JButton logOutButton;
+    private User user;
 
     // Constructor
-    public Restaurants() {
+    public Restaurants(User user) {
 
+        this.user = user;
         // Create a JFrame for the Restaurants page
         JFrame restaurantsFrame = new JFrame("Restaurants");
         restaurantsFrame.setContentPane(panel1);  // Set the panel as the content pane of the frame
@@ -34,7 +36,7 @@ public class Restaurants {
                 restaurantsFrame.setVisible(false);
 
                 // Open the Restaurants frame
-                new Menu("BMC");
+                new Menu("BMC", user);
             }
         });
         menuButtonMozart.addActionListener(new ActionListener() {
@@ -43,7 +45,7 @@ public class Restaurants {
                 restaurantsFrame.setVisible(false);
 
                 // Open the Restaurants frame
-                new Menu("Mozart");
+                new Menu("Mozart", user);
             }
         });
         menuButtonKirac.addActionListener(new ActionListener() {
@@ -52,7 +54,7 @@ public class Restaurants {
                 restaurantsFrame.setVisible(false);
 
                 // Open the Restaurants frame
-                new Menu("Kirac");
+                new Menu("Kirac", user);
             }
         });
         HomeLogo.addMouseListener(new MouseAdapter() {
@@ -60,7 +62,7 @@ public class Restaurants {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 restaurantsFrame.setVisible(false);
-                new HomePage();
+                new HomePage(user);
             }
         });
         logOutButton.addActionListener(new ActionListener() {
