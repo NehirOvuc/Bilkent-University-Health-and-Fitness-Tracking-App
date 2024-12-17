@@ -38,10 +38,8 @@ public class Menu {
     private JButton logOutButton;
     private JButton filterButton;
     private int mealNum;
-    private Boolean restricCalories;
 
     public Menu(String resName) {
-        restricCalories = checkBox1.isSelected();
         mealNum = 5;
         TXThandler th = new TXThandler(resName);
         ArrayList<Meal> meals = th.meals;
@@ -77,26 +75,14 @@ public class Menu {
         // Disable resizing
         MenuFrame.setResizable(true);
 
+        for (int i = 0; i < Math.min(meals.size(), 5); i++) {
+            Meal m = meals.get(i);
+            setMealData(i, m, resName);
+        }
+
         // Show the Restaurants frame
         MenuFrame.setVisible(true);
 
-//        // Add mouse listeners for text fields to clear content when clicked
-//        minValueTextField.addMouseListener(new MouseAdapter() {
-//            @Override
-//            public void mouseClicked(MouseEvent e) {
-//                if (minValueTextField.getText().equals("Enter value...")) {
-//                    minValueTextField.setText("");
-//                }
-//            }
-//        });
-//        maxValueTextField.addMouseListener(new MouseAdapter() {
-//            @Override
-//            public void mouseClicked(MouseEvent e) {
-//                if (maxValueTextField.getText().equals("Enter max value...")) {
-//                    maxValueTextField.setText("");
-//                }
-//            }
-//        });
 
         navRes.addMouseListener(new MouseAdapter() {
             @Override
@@ -123,6 +109,7 @@ public class Menu {
                 new UserLogin(MenuFrame);
             }
         });
+
         filterButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -131,31 +118,43 @@ public class Menu {
 
                 String maxValueString = maxValueTextField.getText();
                 String minValueString = minValueTextField.getText();
-                if(maxValueString != null && minValueString != null) {
-                    try{
+
+                // Parse user input for min and max calorie values
+                if (!maxValueString.equals("Value") && !minValueString.equals("Value")) {
+                    try {
                         maxValue = Integer.parseInt(maxValueString);
                         minValue = Integer.parseInt(minValueString);
-                    }catch(NumberFormatException ex){
+                    } catch (NumberFormatException ex) {
                         JOptionPane.showMessageDialog(null, "Please enter a valid number");
+                        return; // Exit the method if invalid input
                     }
+
                     if (minValue > maxValue) {
                         JOptionPane.showMessageDialog(null, "Minimum number cannot be greater than maximum number");
+                        return;
                     }
                 }
 
+                // Iterate through meals and show/hide components based on calorie range
                 for (int i = 0; i < Math.min(meals.size(), 5); i++) {
                     Meal m = meals.get(i);
-                    if (restricCalories){
-                        if((m.getMealCal() <= maxValue) && (m.getMealCal() >= minValue)){
-                            setMealData(i, m, resName);
-                        }
-                    }
-                    else{
-                        setMealData(i, m, resName);
-                    }
+                    boolean withinRange = (m.getMealCal() <= maxValue) && (m.getMealCal() >= minValue);
+
+                    // Get components for this meal
+                    JLabel mealPhoto = getMealPhotoLabel(i);
+                    JTextArea mealDesc = getMealDescriptionTextArea(i);
+                    JLabel mealTitle = getMealTitleLabel(i);
+                    JLabel mealCalc = getMealCalLabel(i);
+
+                    // Show or hide components based on the range
+                    mealPhoto.setVisible(withinRange);
+                    mealDesc.setVisible(withinRange);
+                    mealTitle.setVisible(withinRange);
+                    mealCalc.setVisible(withinRange);
                 }
             }
         });
+
     }
 
     // Helper methods for meal data handling
