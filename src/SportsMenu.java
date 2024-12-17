@@ -26,12 +26,13 @@ public class SportsMenu {
     private SportType running;
     private SportType swimming;
     private SportType weightlifting;
+    private User user;
 
-    public SportsMenu(String sportName) {
+    public SportsMenu(String sportName, User user) {
+        this.user = user;
         running = new SportType("Running", "running", 480, 620, 800);
         swimming = new SportType("Swimming", "swimming", 180, 300, 420);
         weightlifting = new SportType("Weightlifting", "weightlifting", 390, 440, 630);
-        TXThandler th = new TXThandler(sportName);
         textFieldCalculation.setText("");
 
         sportPhoto.setIcon(new ImageIcon("src/images/Sports/"+sportName.toLowerCase()+"/.png"));
@@ -58,8 +59,7 @@ public class SportsMenu {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 SportsFrame.setVisible(false);
-
-                new Fitness();
+                new Fitness(user);
             }
         });
         HomeLogo.addMouseListener(new MouseAdapter() {
@@ -67,8 +67,7 @@ public class SportsMenu {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 SportsFrame.setVisible(false);
-
-                new Login();
+                new UserLogin(SportsFrame);
             }
         });
         logOutButton.addActionListener(new ActionListener() {
@@ -130,6 +129,7 @@ public class SportsMenu {
                 }
             }
         });
+        SportsFrame.setVisible(true);
     }
 
     // Configure text area settings

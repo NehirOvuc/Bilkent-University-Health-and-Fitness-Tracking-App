@@ -25,14 +25,13 @@ public class Goals {
     private JLabel goalsLabel;
     User user;
 
-
     public Goals(User user) {
         this.user = user;
         // JFrame oluştur ve Goals.form'u bağla
         JFrame frame = new JFrame("Goals");
         frame.setContentPane(panel1);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(900, 600);
+        frame.setSize(850, 700);
         frame.setLocationRelativeTo(null);
 
         // "Calculate" butonu için ActionListener ekle
@@ -142,6 +141,7 @@ public class Goals {
         // Paneli yeniden çiz
         resultPanel.revalidate();
         resultPanel.repaint();
+
     }
 }
 

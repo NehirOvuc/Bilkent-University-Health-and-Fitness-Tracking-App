@@ -17,10 +17,12 @@ public class Fitness {
     private JPanel PanelBilkent;
     private JLabel runningPhoto;
     private JButton getMoreButtonWeightlifting;
+    private User user;
 
     // Constructor
-    public Fitness() {
+    public Fitness(User user) {
 
+        this.user = user;
         // Create a JFrame for the Restaurants page
         JFrame sportsFrame = new JFrame("Sports");
         sportsFrame.setContentPane(panel1);  // Set the panel as the content pane of the frame
@@ -31,7 +33,6 @@ public class Fitness {
         // Disable resizing
         sportsFrame.setResizable(false);
         // Show the Restaurants frame
-        sportsFrame.setVisible(true);
 
         moreButtonRunning.addActionListener(new ActionListener() {
             @Override
@@ -39,7 +40,7 @@ public class Fitness {
                 sportsFrame.setVisible(false);
 
                 // Open the Restaurants frame
-                new Menu("Running");
+                new SportsMenu("Running", user);
             }
         });
         moreButtonRunning.addActionListener(new ActionListener() {
@@ -48,7 +49,7 @@ public class Fitness {
                 sportsFrame.setVisible(false);
 
                 // Open the Restaurants frame
-                new Menu("Swimming");
+                new SportsMenu("Swimming", user);
             }
         });
         moreButtonWeightlifting.addActionListener(new ActionListener() {
@@ -57,7 +58,7 @@ public class Fitness {
                 sportsFrame.setVisible(false);
 
                 // Open the Restaurants frame
-                new Menu("Weightlifting");
+                new SportsMenu("Weightlifting", user);
             }
         });
         HomeLogo.addMouseListener(new MouseAdapter() {
@@ -65,7 +66,7 @@ public class Fitness {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 sportsFrame.setVisible(false);
-                new Login();
+                new HomePage(user);
             }
         });
         logOutButton.addActionListener(new ActionListener() {
@@ -79,23 +80,24 @@ public class Fitness {
             @Override
             public void actionPerformed(ActionEvent e) {
                 sportsFrame.setVisible(false);
-                new SportsMenu("Weightlifting");
+                new SportsMenu("Weightlifting", user);
             }
         });
         moreButtonRunning.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 sportsFrame.setVisible(false);
-                new SportsMenu("Running");
+                new SportsMenu("Running", user);
             }
         });
         moreButtonSwimming.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 sportsFrame.setVisible(false);
-                new SportsMenu("Swimming");
+                new SportsMenu("Swimming", user);
             }
         });
+        sportsFrame.setVisible(true);
     }
 
 }

@@ -18,6 +18,7 @@ public class FriendsPageFinal extends JFrame {
     private JButton showFriendsButton;
     private JTextField friendIDTextField;
     private JTextArea friendsListArea;
+    private JLabel userIDLabel;
 
     private User currentUser; // Logged-in user
     private int userID;       // User's ID retrieved from the database
@@ -40,6 +41,7 @@ public class FriendsPageFinal extends JFrame {
 
         // Fetch the logged-in user's ID
         this.userID = fetchUserID();
+        userIDLabel.setText(userID + "");
 
         if (userID == -1) {
             JOptionPane.showMessageDialog(this, "Could not retrieve your user ID. Exiting.");

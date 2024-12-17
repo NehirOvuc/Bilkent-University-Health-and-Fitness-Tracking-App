@@ -43,8 +43,8 @@ public class HomePage {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                //homeFrame.setVisible(false);
-                //new Fitness();
+                homeFrame.setVisible(false);
+                new Fitness(user);
             }
         });
 
@@ -75,7 +75,8 @@ public class HomePage {
         fitnessButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //new Fitness();
+                homeFrame.setVisible(false);
+                new Fitness(user);
             }
         });
         goalsButton.addActionListener(new ActionListener() {
