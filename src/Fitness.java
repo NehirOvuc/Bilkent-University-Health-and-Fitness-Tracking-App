@@ -113,6 +113,7 @@ public class Fitness {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                sportsFrame.setVisible(false);
                 new FriendsPageFinal(user);
             }
         });
