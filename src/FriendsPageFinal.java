@@ -65,8 +65,9 @@ public class FriendsPageFinal {
         HomeLogo.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
                 friendsFrame.setVisible(false);
-                new UserLogin(null);
+                new HomePage();
             }
         });
 
@@ -74,7 +75,7 @@ public class FriendsPageFinal {
             @Override
             public void actionPerformed(ActionEvent e) {
                 friendsFrame.setVisible(false);
-                new UserLogin(null);
+                new UserLogin(friendsFrame);
             }
         });
 
