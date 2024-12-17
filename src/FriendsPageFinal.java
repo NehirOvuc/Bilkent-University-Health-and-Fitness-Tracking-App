@@ -450,7 +450,7 @@ public class FriendsPageFinal {
             pstmt.executeUpdate();
         }
     }
-    
+
     private String[] sortUsernames(String user1, String user2) {
         if (user1.compareToIgnoreCase(user2) < 0) {
             return new String[]{user1, user2};
@@ -466,15 +466,26 @@ public class FriendsPageFinal {
     }
 
 
-    public static void main(String[] args) {
-        // For testing, create a dummy user
-        User newUser = new User("niir", "password123", "Male", 30, 175, 70, 15); // Ensure this user exists in the 'bhfusers' table
-
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new FriendsPageFinal(newUser);
-            }
-        });
-    }
+//    public static void main(String[] args) {
+//
+////
+////        // For testing, create a dummy user
+////
+////        User newUser = new User();
+////        newUser.userName = "niir";
+////        newUser.password = "niir.123";
+////        newUser.gender = "Female";
+////        newUser.age = 20;
+////        newUser.height = 158;
+////        newUser.weight = 45000;
+////        newUser.bFPercentage = 20;
+////
+////        SwingUtilities.invokeLater(new Runnable() {
+////            @Override
+////            public void run() {
+////                new FriendsPageFinal(newUser);
+////            }
+////        });
+////        new FriendsPageFinal(null);
+//    }
 }
