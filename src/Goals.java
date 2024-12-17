@@ -18,6 +18,12 @@ public class Goals {
     private JComboBox<String> activityComboBox; // Aktivite seviyesi
     private JLabel HomeLogo;           // Home butonu
     private JButton logOutButton;
+    private JTextField weight;
+    private JTextField height;
+    private JTextField BodyFat;
+    private JTextField ActivityLevel;
+    private JTextField gender;
+
 
     public Goals() {
         // JFrame oluştur ve Goals.form'u bağla

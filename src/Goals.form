@@ -94,6 +94,7 @@
               </grid>
             </constraints>
             <properties>
+              <editable value="false"/>
               <text value="Height(cm):"/>
             </properties>
           </component>
@@ -104,6 +105,7 @@
               </grid>
             </constraints>
             <properties>
+              <editable value="false"/>
               <text value="Gender"/>
             </properties>
           </component>
@@ -114,6 +116,7 @@
               </grid>
             </constraints>
             <properties>
+              <editable value="false"/>
               <text value="Weight(kg):"/>
             </properties>
           </component>
@@ -132,6 +135,7 @@
               </grid>
             </constraints>
             <properties>
+              <editable value="false"/>
               <text value="Body Fat(%):"/>
             </properties>
           </component>
@@ -142,6 +146,7 @@
               </grid>
             </constraints>
             <properties>
+              <editable value="false"/>
               <text value="Activity Level:"/>
             </properties>
           </component>

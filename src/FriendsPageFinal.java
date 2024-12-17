@@ -1,492 +1,212 @@
 import javax.swing.*;
-import java.awt.event.*;
-import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
-public class FriendsPageFinal {
-    private JPanel panel1;
+public class FriendsPageFinal extends JFrame {
+    private JPanel friendManagerPanel;
     private JLabel HomeLogo;
     private JButton logOutButton;
-    private JButton ADDButton;
-    private JButton REMOVEButton;
-    private JFormattedTextField challenge1;
-    private JFormattedTextField challenge2;
-    private JFormattedTextField challenge3;
-    private JFormattedTextField friend1;
-    private JFormattedTextField friend2;
-    private JFormattedTextField friend3;
-    private JFormattedTextField friend4;
-    private JFormattedTextField friend5;
-    private JButton CLICKHERETOCREATEButton;
+    private JButton addFriendButton;
+    private JButton removeFriendButton;
+    private JButton challengeButton;
     private JLabel restaurantButton;
     private JLabel fitnessButton;
     private JLabel goalsButton;
+    private JButton showFriendsButton;
+    private JTextField friendIDTextField;
+    private JTextArea friendsListArea;
 
-    // The currently logged-in user
-    private User currentUser;
+    private User currentUser; // Logged-in user
+    private int userID;       // User's ID retrieved from the database
 
-    // Database credentials
-    private final String DB_URL = "jdbc:mysql://ndpm.asuscomm.com:46603/bhfdb";
-    private final String DB_USERNAME = "root"; // Updated to use dedicated user
-    private final String DB_PASSWORD = "Bhf123"; // Use a strong password
 
-    // List to hold friends
-    private List<String> friendsList = new ArrayList<>();
+    // Database connection details
+    final String DB_URL = "jdbc:mysql://ndpm.asuscomm.com:46603/bhfdb";
+    final String USERNAME = "root";
+    final String PASSWORD = "Bhf123";
 
-    // Constructor accepting the current user
     public FriendsPageFinal(User user) {
         this.currentUser = user;
 
-        JFrame friendsFrame = new JFrame("Friends");
-        friendsFrame.setContentPane(panel1);
-        friendsFrame.setSize(900, 900);
-        friendsFrame.setLocationRelativeTo(null);
-        friendsFrame.pack();
-        friendsFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        friendsFrame.setResizable(true);
-        friendsFrame.setVisible(true);
+        // Initialize components
+        setTitle("Friend Manager");
+        setContentPane(friendManagerPanel);
+        setSize(500, 400);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setLocationRelativeTo(null);
 
-        // Initialize the Friends Table
-        initializeFriendsTable();
+        // Fetch the logged-in user's ID
+        this.userID = fetchUserID();
 
-        try (Connection conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD)) {
-            loadFriends(conn);
-            displayFriends();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(friendsFrame, "Database Error: " + e.getMessage(),
-                    "Error", JOptionPane.ERROR_MESSAGE);
-            friendsFrame.dispose();
+        if (userID == -1) {
+            JOptionPane.showMessageDialog(this, "Could not retrieve your user ID. Exiting.");
+            dispose();
             return;
         }
 
-        HomeLogo.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                friendsFrame.setVisible(false);
-                new HomePage(currentUser);
-            }
-        });
-
-        logOutButton.addActionListener(new ActionListener() {
+        // Action listener for "Add Friend" button
+        addFriendButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                friendsFrame.setVisible(false);
-                new UserLogin(friendsFrame);
+                addFriend();
             }
         });
 
-        ADDButton.addActionListener(new ActionListener() {
+        // Action listener for "Show Friends" button
+        showFriendsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                openAddFriendDialog(friendsFrame);
+                showFriends();
             }
         });
 
-        REMOVEButton.addActionListener(new ActionListener() {
+        // Action listener for "Remove Friend" button
+        removeFriendButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                openRemoveFriendDialog(friendsFrame);
+                removeFriend();
             }
         });
 
-        CLICKHERETOCREATEButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-              //not done yet
-            }
-        });
-
-        restaurantButton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                friendsFrame.setVisible(false);
-                new Restaurants(user);
-            }
-        });
-
-        fitnessButton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                friendsFrame.setVisible(false);
-                // new Fitness();
-            }
-        });
-
-        goalsButton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                friendsFrame.setVisible(false);
-                // new Goals();
-            }
-        });
-    }
-
-    private void initializeFriendsTable() {
-
+        setVisible(true);
     }
 
     /**
-     * loading the list of friends from the database into friendsList.
-     *
-     * @param conn The active database connection.
-     * @throws SQLException If a database access error occurs.
+     * Fetch the userID of the currently logged-in user based on userName.
      */
-    private void loadFriends(Connection conn) throws SQLException {
-        String query = "SELECT "
-                + "CASE "
-                + "WHEN firstUser = ? THEN secondUser "
-                + "ELSE firstUser "
-                + "END AS friendName "
-                + "FROM bhffriends "
-                + "WHERE firstUser = ? OR secondUser = ?";
+    private int fetchUserID() {
+        int fetchedID = -1;
 
-        try (PreparedStatement pstmt = conn.prepareStatement(query)) {
+        try (Connection conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD)) {
+            String query = "SELECT userID FROM bhfusers WHERE userName = ?";
+            PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setString(1, currentUser.userName);
-            pstmt.setString(2, currentUser.userName);
-            pstmt.setString(3, currentUser.userName);
 
-            try (ResultSet rs = pstmt.executeQuery()) {
-                while (rs.next()) {
-                    String friendName = rs.getString("friendName");
-                    friendsList.add(friendName);
-                }
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                fetchedID = rs.getInt("userID");
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Database error while retrieving user ID.");
         }
-    }
 
-    private void displayFriends() {
-        friend1.setText("");
-        friend2.setText("");
-        friend3.setText("");
-        friend4.setText("");
-        friend5.setText("");
-
-        for (int i = 0; i < friendsList.size() && i < 5; i++) {
-            String friend = friendsList.get(i);
-            switch (i) {
-                case 0:
-                    friend1.setText(friend);
-                    break;
-                case 1:
-                    friend2.setText(friend);
-                    break;
-                case 2:
-                    friend3.setText(friend);
-                    break;
-                case 3:
-                    friend4.setText(friend);
-                    break;
-                case 4:
-                    friend5.setText(friend);
-                    break;
-                default:
-                    break;
-            }
-        }
-    }
-
-    private void openAddFriendDialog(JFrame parentFrame) {
-        JDialog addFriendDialog = new JDialog(parentFrame, "Add Friend", true);
-        addFriendDialog.setSize(350, 200);
-        addFriendDialog.setLayout(new BorderLayout());
-        addFriendDialog.setLocationRelativeTo(parentFrame);
-
-        JPanel panel = new JPanel(new GridLayout(3, 1, 10, 10));
-        JLabel label = new JLabel("Enter Friend's Username:");
-        JTextField friendUsernameField = new JTextField();
-        JPanel buttonsPanel = new JPanel();
-
-        JButton submitButton = new JButton("Submit");
-        JButton cancelButton = new JButton("Cancel");
-
-        buttonsPanel.add(submitButton);
-        buttonsPanel.add(cancelButton);
-
-        panel.add(label);
-        panel.add(friendUsernameField);
-        panel.add(buttonsPanel);
-
-        addFriendDialog.add(panel, BorderLayout.CENTER);
-
-        submitButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String friendUsername = friendUsernameField.getText().trim();
-
-                if (friendUsername.isEmpty()) {
-                    JOptionPane.showMessageDialog(addFriendDialog, "Username cannot be empty.",
-                            "Error", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
-
-                if (friendUsername.equals(currentUser.userName)) {
-                    JOptionPane.showMessageDialog(addFriendDialog, "You cannot add yourself as a friend.",
-                            "Error", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
-
-                if (!isValidUsername(friendUsername)) {
-                    JOptionPane.showMessageDialog(addFriendDialog, "Invalid username format.",
-                            "Error", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
-
-                try (Connection conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD)) {
-                    if (!isUserExists(conn, friendUsername)) {
-                        JOptionPane.showMessageDialog(addFriendDialog, "User does not exist.",
-                                "Error", JOptionPane.ERROR_MESSAGE);
-                        return;
-                    }
-
-                    if (isFriendshipExists(conn, currentUser.userName, friendUsername)) {
-                        JOptionPane.showMessageDialog(addFriendDialog, "You are already friends with this user.",
-                                "Information", JOptionPane.INFORMATION_MESSAGE);
-                        return;
-                    }
-
-                    addFriendship(conn, currentUser.userName, friendUsername);
-                    JOptionPane.showMessageDialog(addFriendDialog, "Friend added successfully!",
-                            "Success", JOptionPane.INFORMATION_MESSAGE);
-
-                    friendsList.add(friendUsername);
-                    displayFriends();
-
-                    addFriendDialog.dispose();
-
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                    JOptionPane.showMessageDialog(addFriendDialog, "Database Error: " + ex.getMessage(),
-                            "Error", JOptionPane.ERROR_MESSAGE);
-                }
-            }
-        });
-
-        cancelButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                addFriendDialog.dispose();
-            }
-        });
-
-        addFriendDialog.setVisible(true);
-    }
-
-
-    private void openRemoveFriendDialog(JFrame parentFrame) {
-        JDialog removeFriendDialog = new JDialog(parentFrame, "Remove Friend", true);
-        removeFriendDialog.setSize(350, 200);
-        removeFriendDialog.setLayout(new BorderLayout());
-        removeFriendDialog.setLocationRelativeTo(parentFrame);
-
-        JPanel panel = new JPanel(new GridLayout(3, 1, 10, 10));
-        JLabel label = new JLabel("Enter Friend's Username:");
-        JTextField friendUsernameField = new JTextField();
-        JPanel buttonsPanel = new JPanel();
-
-        JButton submitButton = new JButton("Submit");
-        JButton cancelButton = new JButton("Cancel");
-
-        buttonsPanel.add(submitButton);
-        buttonsPanel.add(cancelButton);
-
-        panel.add(label);
-        panel.add(friendUsernameField);
-        panel.add(buttonsPanel);
-
-        removeFriendDialog.add(panel, BorderLayout.CENTER);
-
-        submitButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String friendUsername = friendUsernameField.getText().trim();
-
-                if (friendUsername.isEmpty()) {
-                    JOptionPane.showMessageDialog(removeFriendDialog, "Username cannot be empty.",
-                            "Error", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
-
-                if (friendUsername.equals(currentUser.userName)) {
-                    JOptionPane.showMessageDialog(removeFriendDialog, "You cannot remove yourself.",
-                            "Error", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
-
-                if (!isValidUsername(friendUsername)) {
-                    JOptionPane.showMessageDialog(removeFriendDialog, "Invalid username format.",
-                            "Error", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
-
-                try (Connection conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD)) {
-                    if (!isUserExists(conn, friendUsername)) {
-                        JOptionPane.showMessageDialog(removeFriendDialog, "User does not exist.",
-                                "Error", JOptionPane.ERROR_MESSAGE);
-                        return;
-                    }
-
-                    if (!isFriendshipExists(conn, currentUser.userName, friendUsername)) {
-                        JOptionPane.showMessageDialog(removeFriendDialog, "You are not friends with this user.",
-                                "Information", JOptionPane.INFORMATION_MESSAGE);
-                        return;
-                    }
-
-                    removeFriendship(conn, currentUser.userName, friendUsername);
-                    JOptionPane.showMessageDialog(removeFriendDialog, "Friend removed successfully!",
-                            "Success", JOptionPane.INFORMATION_MESSAGE);
-
-                    friendsList.remove(friendUsername);
-                    displayFriends();
-
-                    removeFriendDialog.dispose();
-
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                    JOptionPane.showMessageDialog(removeFriendDialog, "Database Error: " + ex.getMessage(),
-                            "Error", JOptionPane.ERROR_MESSAGE);
-                }
-            }
-        });
-
-        cancelButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                removeFriendDialog.dispose();
-            }
-        });
-
-        removeFriendDialog.setVisible(true);
+        return fetchedID;
     }
 
     /**
-     * removes a friend from the friendsList and updates the UI.
-     *
-     * @param friendUsername The username of the friend to remove.
+     * Adds a new friend to the database.
      */
-    private void removeFriendFromTable(String friendUsername) {
-        friendsList.remove(friendUsername);
-        displayFriends();
-    }
+    private void addFriend() {
+        int friendID;
 
-    /**
-     * checks if a user exists in the 'bhfusers' table.
-     *
-     * @param conn      The active database connection.
-     * @param userName The username to check.
-     * @return True if the user exists, false otherwise.
-     * @throws SQLException If a database access error occurs.
-     */
-    private boolean isUserExists(Connection conn, String userName) throws SQLException {
-        String query = "SELECT userName FROM bhfusers WHERE userName = ?";
-        try (PreparedStatement pstmt = conn.prepareStatement(query)) {
-            pstmt.setString(1, userName);
-            try (ResultSet rs = pstmt.executeQuery()) {
-                return rs.next();
+        try {
+            friendID = Integer.parseInt(friendIDTextField.getText());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Invalid User ID. Please enter a number.");
+            return;
+        }
+
+        if (friendID == userID) {
+            JOptionPane.showMessageDialog(this, "You cannot add yourself as a friend!");
+            return;
+        }
+
+        try (Connection conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD)) {
+            // Check if the friendship already exists
+            String checkFriendshipSQL = "SELECT * FROM bhffriends WHERE (friend1ID = ? AND friend2ID = ?) OR (friend1ID = ? AND friend2ID = ?)";
+            PreparedStatement checkStmt = conn.prepareStatement(checkFriendshipSQL);
+            checkStmt.setInt(1, userID);
+            checkStmt.setInt(2, friendID);
+            checkStmt.setInt(3, friendID);
+            checkStmt.setInt(4, userID);
+
+            ResultSet rs = checkStmt.executeQuery();
+            if (rs.next()) {
+                JOptionPane.showMessageDialog(this, "You are already friends with this user.");
+                return;
             }
+
+            // Insert the new friendship
+            String insertFriendshipSQL = "INSERT INTO bhffriends (friend1ID, friend2ID) VALUES (?, ?)";
+            PreparedStatement insertStmt = conn.prepareStatement(insertFriendshipSQL);
+            insertStmt.setInt(1, userID);
+            insertStmt.setInt(2, friendID);
+
+            int rowsInserted = insertStmt.executeUpdate();
+            if (rowsInserted > 0) {
+                JOptionPane.showMessageDialog(this, "Friend added successfully!");
+            } else {
+                JOptionPane.showMessageDialog(this, "Failed to add friend.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Database error. Could not add friend.");
         }
     }
 
     /**
-     * checks if a friendship exists between two users in the 'bhffriends' table.
-     *
-     * @param conn       The active database connection.
-     * @param userName1  First user's username.
-     * @param userName2  Second user's username.
-     * @return True if the friendship exists, false otherwise.
-     * @throws SQLException If a database access error occurs.
+     * Removes a friend from the database.
      */
-    private boolean isFriendshipExists(Connection conn, String userName1, String userName2) throws SQLException {
-        String query = "SELECT * FROM bhffriends WHERE "
-                + "(firstUser = ? AND secondUser = ?) OR (firstUser = ? AND secondUser = ?)";
-        try (PreparedStatement pstmt = conn.prepareStatement(query)) {
-            pstmt.setString(1, userName1);
-            pstmt.setString(2, userName2);
-            pstmt.setString(3, userName2);
-            pstmt.setString(4, userName1);
-            try (ResultSet rs = pstmt.executeQuery()) {
-                return rs.next();
+    private void removeFriend() {
+        int friendID;
+
+        try {
+            friendID = Integer.parseInt(friendIDTextField.getText());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Invalid User ID. Please enter a number.");
+            return;
+        }
+
+        try (Connection conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD)) {
+            // Delete friendship where friend1ID and friend2ID match in either direction
+            String removeFriendSQL = "DELETE FROM bhffriends WHERE (friend1ID = ? AND friend2ID = ?) OR (friend1ID = ? AND friend2ID = ?)";
+            PreparedStatement pstmt = conn.prepareStatement(removeFriendSQL);
+            pstmt.setInt(1, userID);
+            pstmt.setInt(2, friendID);
+            pstmt.setInt(3, friendID);
+            pstmt.setInt(4, userID);
+
+            int rowsDeleted = pstmt.executeUpdate();
+            if (rowsDeleted > 0) {
+                JOptionPane.showMessageDialog(this, "Friend removed successfully!");
+            } else {
+                JOptionPane.showMessageDialog(this, "No friendship found with the provided User ID.");
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Database error. Could not remove friend.");
         }
     }
 
     /**
-     * adds a friendship between two users in the 'bhffriends' table.
-     *
-     * @param conn        The active database connection.
-     * @param userName1   First user's username.
-     * @param userName2   Second user's username.
-     * @throws SQLException If a database access error occurs.
+     * Displays the list of friends for the current user.
      */
-    private void addFriendship(Connection conn, String userName1, String userName2) throws SQLException {
-        // Sort usernames to maintain consistency and avoid duplicates
-        String[] sortedUsers = sortUsernames(userName1, userName2);
-        String insertSQL = "INSERT INTO bhffriends (firstUser, secondUser) VALUES (?, ?)";
-        try (PreparedStatement pstmt = conn.prepareStatement(insertSQL)) {
-            pstmt.setString(1, sortedUsers[0]);
-            pstmt.setString(2, sortedUsers[1]);
-            pstmt.executeUpdate();
+    private void showFriends() {
+        try (Connection conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD)) {
+            String getFriendsSQL = "SELECT u.userName " +
+                    "FROM bhfusers u " +
+                    "JOIN bhffriends f ON (u.userID = f.friend2ID AND f.friend1ID = ?) " +
+                    "OR (u.userID = f.friend1ID AND f.friend2ID = ?)";
+            PreparedStatement pstmt = conn.prepareStatement(getFriendsSQL);
+            pstmt.setInt(1, userID);
+            pstmt.setInt(2, userID);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            // Display the list of friends in the text area
+            StringBuilder friendsList = new StringBuilder("Your Friends:\n");
+            while (rs.next()) {
+                friendsList.append(rs.getString("userName")).append("\n");
+            }
+
+            friendsListArea.setText(friendsList.toString());
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error retrieving friends list.");
         }
     }
-
-    /**
-     * removes a friendship between two users from the 'bhffriends' table.
-     *
-     * @param conn        The active database connection.
-     * @param userName1   First user's username.
-     * @param userName2   Second user's username.
-     * @throws SQLException If a database access error occurs.
-     */
-    private void removeFriendship(Connection conn, String userName1, String userName2) throws SQLException {
-        String deleteSQL = "DELETE FROM bhffriends WHERE "
-                + "(firstUser = ? AND secondUser = ?) OR (firstUser = ? AND secondUser = ?)";
-        try (PreparedStatement pstmt = conn.prepareStatement(deleteSQL)) {
-            pstmt.setString(1, userName1);
-            pstmt.setString(2, userName2);
-            pstmt.setString(3, userName2);
-            pstmt.setString(4, userName1);
-            pstmt.executeUpdate();
-        }
-    }
-
-    private String[] sortUsernames(String user1, String user2) {
-        if (user1.compareToIgnoreCase(user2) < 0) {
-            return new String[]{user1, user2};
-        } else {
-            return new String[]{user2, user1};
-        }
-    }
-
-
-    private boolean isValidUsername(String username) {
-        // Example: Username must be 3-20 characters, alphanumeric and underscores
-        return username.matches("^[a-zA-Z0-9_]{3,20}$");
-    }
-
-
-    public static void main(String[] args) {
-
-////
-//        // For testing, create a dummy user
-//
-//        User newUser = new User();
-//        newUser.userName = "niir";
-//        newUser.password = "niir.123";
-//        newUser.gender = "Female";
-//        newUser.age = 20;
-//        newUser.height = 158;
-//        newUser.weight = 45000;
-//        newUser.bFPercentage = 20;
-//
-//        SwingUtilities.invokeLater(new Runnable() {
-//            @Override
-//            public void run() {
-//                new FriendsPageFinal(newUser);
-//            }
-//        });
-      new FriendsPageFinal(null);
-  }
 }
+
