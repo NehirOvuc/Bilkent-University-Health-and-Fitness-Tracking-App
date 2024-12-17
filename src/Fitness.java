@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -18,6 +19,8 @@ public class Fitness {
     private JLabel runningPhoto;
     private JLabel restaurantsLabel;
     private JLabel goalsLabel;
+    private JLabel swimmingPhoto;
+    private JLabel weightliftingPhoto;
     private JButton getMoreButtonWeightlifting;
     private User user;
 
@@ -34,6 +37,22 @@ public class Fitness {
         sportsFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // Disable resizing
         sportsFrame.setResizable(false);
+
+
+        ImageIcon originalIcon = new ImageIcon(getClass().getResource("/images/Sports/running.jpg"));
+        Image resizedImage = originalIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+        runningPhoto.setIcon(new ImageIcon(resizedImage));
+
+        ImageIcon originalIcon2 = new ImageIcon(getClass().getResource("/images/Sports/swimming.jpg"));
+        Image resizedImage2 = originalIcon2.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+        swimmingPhoto.setIcon(new ImageIcon(resizedImage2));
+
+        ImageIcon originalIcon3 = new ImageIcon(getClass().getResource("/images/Sports/weightlifting.jpg"));
+        Image resizedImage3 = originalIcon3.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+        weightliftingPhoto.setIcon(new ImageIcon(resizedImage3));
+
+
+
         // Show the Restaurants frame
 
         moreButtonRunning.addActionListener(new ActionListener() {
@@ -41,16 +60,16 @@ public class Fitness {
             public void actionPerformed(ActionEvent e) {
                 sportsFrame.setVisible(false);
 
-                // Open the Restaurants frame
+                // Open the Running frame
                 new SportsMenu("Running", user);
             }
         });
-        moreButtonRunning.addActionListener(new ActionListener() {
+        moreButtonSwimming.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 sportsFrame.setVisible(false);
 
-                // Open the Restaurants frame
+                // Open the Swimming frame
                 new SportsMenu("Swimming", user);
             }
         });
@@ -78,28 +97,9 @@ public class Fitness {
                 new UserLogin(sportsFrame);
             }
         });
-        moreButtonWeightlifting.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                sportsFrame.setVisible(false);
-                new SportsMenu("Weightlifting", user);
-            }
-        });
-        moreButtonRunning.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                sportsFrame.setVisible(false);
-                new SportsMenu("Running", user);
-            }
-        });
-        moreButtonSwimming.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                sportsFrame.setVisible(false);
-                new SportsMenu("Swimming", user);
-            }
-        });
+
         sportsFrame.setVisible(true);
+
         restaurantsLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {

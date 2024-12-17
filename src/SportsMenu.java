@@ -23,6 +23,7 @@ public class SportsMenu {
     private JRadioButton highRadioButton1;
     private JComboBox HoursComboBox;
     private JButton addToTheGoalsButton;
+    private JTextArea textAreaGoals;
     private SportType running;
     private SportType swimming;
     private SportType weightlifting;
@@ -35,13 +36,17 @@ public class SportsMenu {
         weightlifting = new SportType("Weightlifting", "weightlifting", 390, 440, 630);
         textFieldCalculation.setText("");
 
-        sportPhoto.setIcon(new ImageIcon("src/images/Sports/"+sportName.toLowerCase()+"/.png"));
-        sportTitle.setText(SportType.getSportTitle());
+
+        ImageIcon originalIcon = new ImageIcon(getClass().getResource("/images/Sports/"+sportName.toLowerCase()+".jpg"));
+        Image resizedImage = originalIcon.getImage().getScaledInstance(400, 400, Image.SCALE_SMOOTH);
+        sportPhoto.setIcon(new ImageIcon(resizedImage));
+
+        sportTitle.setText(sportName);
 
         // Create a JFrame for the Restaurants page
         JFrame SportsFrame = new JFrame("SportsMenu");
         SportsFrame.setContentPane(panelS);  // Set the panel as the content pane of the frame
-        SportsFrame.setSize(850, 900);
+        SportsFrame.setSize(900, 1000);
         SportsFrame.setLocationRelativeTo(null);  // Center the frame on the screen
         SportsFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -80,56 +85,39 @@ public class SportsMenu {
         calculateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                TextField textFieldCalculation = new TextField();
 
-                if(sportTitle.getText().equalsIgnoreCase("running"))
-                {
-                    if(lowRadioButton.isSelected())
-                    {
-                        textFieldCalculation.setText("You can burn approximately " + running.getSportLowTempoBurnedCaloriesPerHour() + " calories by 1 hour " + SportType.getSportTitle() +" in low tempo.");
-                    }
-                    else if(mediumRadioButton.isSelected())
-                    {
-                        textFieldCalculation.setText("You can burn approximately " + running.getSportMediumTempoBurnedCaloriesPerHour() + " calories by 1 hour " + SportType.getSportTitle() +" in medium tempo.");
-                    }
-                    else if(highRadioButton.isSelected())
-                    {
-                        textFieldCalculation.setText("You can burn approximately " + running.getSportHighTempoBurnedCaloriesPerHour() + " calories by 1 hour " + SportType.getSportTitle() +" in high tempo.");
-                    }
+                SportType sport;
+                if (sportName.equalsIgnoreCase("running")) {
+                    sport = running;
+                } else if (sportName.equalsIgnoreCase("swimming")) {
+                    sport = swimming;
+                } else {
+                    sport = weightlifting;
                 }
-                else if(sportTitle.getText().equalsIgnoreCase("swimming"))
-                {
-                    if(lowRadioButton.isSelected())
-                    {
-                        textFieldCalculation.setText("You can burn approximately " + swimming.getSportLowTempoBurnedCaloriesPerHour() + " calories by 1 hour " + SportType.getSportTitle() +" in low tempo.");
-                    }
-                    else if(mediumRadioButton.isSelected())
-                    {
-                        textFieldCalculation.setText("You can burn approximately " + swimming.getSportMediumTempoBurnedCaloriesPerHour() + " calories by 1 hour " + SportType.getSportTitle() +" in medium tempo.");
-                    }
-                    else if(highRadioButton.isSelected())
-                    {
-                        textFieldCalculation.setText("You can burn approximately " + swimming.getSportHighTempoBurnedCaloriesPerHour() + " calories by 1 hour " + SportType.getSportTitle() +" in high tempo.");
-                    }
+
+                if (lowRadioButton.isSelected()) {
+                    textFieldCalculation.setText("You can burn approximately " + sport.getSportLowTempoBurnedCaloriesPerHour() + " calories in 1 hour of " + sport.getSportTitle() + " at low tempo.");
+                } else if (mediumRadioButton.isSelected()) {
+                    textFieldCalculation.setText("You can burn approximately " + sport.getSportMediumTempoBurnedCaloriesPerHour() + " calories in 1 hour of " + sport.getSportTitle() + " at medium tempo.");
+                } else if (highRadioButton.isSelected()) {
+                    textFieldCalculation.setText("You can burn approximately " + sport.getSportHighTempoBurnedCaloriesPerHour() + " calories in 1 hour of " + sport.getSportTitle() + " at high tempo.");
                 }
-                else if(sportTitle.getText().equalsIgnoreCase("weightlifting"))
-                {
-                    if(lowRadioButton.isSelected())
-                    {
-                        textFieldCalculation.setText("You can burn approximately " + weightlifting.getSportLowTempoBurnedCaloriesPerHour() + " calories by 1 hour " + SportType.getSportTitle() +" in low tempo.");
-                    }
-                    else if(mediumRadioButton.isSelected())
-                    {
-                        textFieldCalculation.setText("You can burn approximately " + weightlifting.getSportMediumTempoBurnedCaloriesPerHour() + " calories by 1 hour " + SportType.getSportTitle() +" in medium tempo.");
-                    }
-                    else if(highRadioButton.isSelected())
-                    {
-                        textFieldCalculation.setText("You can burn approximately " + weightlifting.getSportHighTempoBurnedCaloriesPerHour() + " calories by 1 hour " + SportType.getSportTitle() +" in high tempo.");
-                    }
-                }
+
             }
         });
         SportsFrame.setVisible(true);
+        addToTheGoalsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(!highRadioButton1.isSelected() && !mediumRadioButton1.isSelected() && !lowRadioButton1.isSelected()) {
+                    textAreaGoals.setText("Please select the intensity level.");
+                }
+                else {
+                    textAreaGoals.setText("Successfully added to the goals list!");
+                }
+
+            }
+        });
     }
 
     // Configure text area settings
