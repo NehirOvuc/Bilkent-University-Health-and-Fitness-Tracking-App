@@ -7,7 +7,7 @@ class GoalPlanner {
         }
     }
 
-    public static double calculateBMR(User user) {
+    public static double calculateBMR(GoalsUser user) {
         if (user.getGender().equalsIgnoreCase("male")) {
             return 66 + (13.7 * user.getWeight()) + (5 * user.getHeight()) - (6.8 * user.getAge());
         } else {
@@ -15,7 +15,7 @@ class GoalPlanner {
         }
     }
 
-    public static double calculateCalorieNeeds(User user) {
+    public static double calculateCalorieNeeds(GoalsUser user) {
         double bmr = calculateBMR(user);
         switch (user.getActivityLevel().toLowerCase()) {
             case "sedentary":
@@ -31,7 +31,7 @@ class GoalPlanner {
         }
     }
 
-    public static String determineGoal(User user) {
+    public static String determineGoal(GoalsUser user) {
         if (user.getWeight() > user.getTargetWeight() && user.getBodyFatPercentage() > 25) {
             return "Weight Loss";
         } else if (user.getWeight() < user.getTargetWeight() && user.getBodyFatPercentage() > 20) {

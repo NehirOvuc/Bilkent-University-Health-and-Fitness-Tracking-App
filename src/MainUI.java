@@ -207,8 +207,8 @@ public class MainUI {
                 double bodyFat = Double.parseDouble(bodyFatField.getText().trim());
     
                 double idealWeight = GoalPlanner.calculateIdealWeight(height, gender);
-                String calorieNeeds = String.format("%.2f kcal", GoalPlanner.calculateCalorieNeeds(new User(gender, age, height, weight, bodyFat, idealWeight, activityLevel)));
-                String goal = GoalPlanner.determineGoal(new User(gender, age, height, weight, bodyFat, idealWeight, activityLevel));
+                String calorieNeeds = String.format("%.2f kcal", GoalPlanner.calculateCalorieNeeds(new GoalsUser(gender, age, height, weight, bodyFat, idealWeight, activityLevel)));
+                String goal = GoalPlanner.determineGoal(new GoalsUser(gender, age, height, weight, bodyFat, idealWeight, activityLevel));
     
                 Map<String, Double> macros = DietPlan.generateMacros(Double.parseDouble(calorieNeeds.split(" ")[0]), goal);
                 List<String> exercises = ExercisePlan.generatePlan(goal);
