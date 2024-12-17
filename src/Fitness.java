@@ -16,6 +16,8 @@ public class Fitness {
     private JButton logOutButton;
     private JPanel PanelBilkent;
     private JLabel runningPhoto;
+    private JLabel restaurantsLabel;
+    private JLabel goalsLabel;
     private JButton getMoreButtonWeightlifting;
     private User user;
 
@@ -98,6 +100,21 @@ public class Fitness {
             }
         });
         sportsFrame.setVisible(true);
+        restaurantsLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                sportsFrame.setVisible(false);
+                new Restaurants(user);
+            }
+        });
+        goalsLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                new FriendsPageFinal(user);
+            }
+        });
     }
 
 }

@@ -73,8 +73,8 @@ public class Goals {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                //frame.setVisible(false);
-                //new Fitness();
+                frame.setVisible(false);
+                new Fitness(user);
             }
         });
         goalsLabel.addMouseListener(new MouseAdapter() {

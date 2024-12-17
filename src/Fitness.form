@@ -29,7 +29,7 @@
               <text value=""/>
             </properties>
           </component>
-          <component id="6eae6" class="javax.swing.JLabel">
+          <component id="6eae6" class="javax.swing.JLabel" binding="restaurantsLabel">
             <constraints>
               <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="2" use-parent-layout="false"/>
             </constraints>
@@ -45,7 +45,7 @@
               <text value="Fitness"/>
             </properties>
           </component>
-          <component id="1b085" class="javax.swing.JLabel">
+          <component id="1b085" class="javax.swing.JLabel" binding="goalsLabel">
             <constraints>
               <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="2" use-parent-layout="false"/>
             </constraints>

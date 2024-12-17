@@ -29,9 +29,8 @@ public class UserLogin extends JDialog {
                 user = getAuthenticatedUser(userName, password);
 
                 if(user != null) {
-                    //TODO: send the user to the class
-                    new HomePage(user);
                     dispose();
+                    new HomePage(user);
                 }
                 else{
                     JOptionPane.showMessageDialog(parent, "Invalid Username or Password", "Error", JOptionPane.ERROR_MESSAGE);

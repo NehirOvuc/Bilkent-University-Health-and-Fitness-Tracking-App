@@ -1,8 +1,5 @@
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 
 public class Restaurants {
     private JPanel panel1;
@@ -14,6 +11,9 @@ public class Restaurants {
     private JButton menuButtonKirac;
     private JLabel HomeLogo;
     private JButton logOutButton;
+    private JLabel restaurantsLabel;
+    private JLabel fitnessLabel;
+    private JLabel goalsLabel;
     private User user;
 
     // Constructor
@@ -70,6 +70,23 @@ public class Restaurants {
             public void actionPerformed(ActionEvent e) {
                 restaurantsFrame.setVisible(false);
                 new UserLogin(restaurantsFrame);
+            }
+        });
+        fitnessLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                restaurantsFrame.setVisible(false);
+                new Fitness(user);
+            }
+        });
+
+        goalsLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                restaurantsFrame.setVisible(false);
+                new FriendsPageFinal(user);
             }
         });
     }

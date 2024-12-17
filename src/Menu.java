@@ -38,6 +38,7 @@ public class Menu {
     private JButton logOutButton;
     private JButton filterButton;
     private JLabel goalsLabel;
+    private JLabel fitnessLabel;
     private int mealNum;
     private User user;
 
@@ -158,6 +159,22 @@ public class Menu {
             }
         });
 
+        goalsLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                MenuFrame.setVisible(false);
+                new FriendsPageFinal(user);
+            }
+        });
+        fitnessLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                MenuFrame.setVisible(false);
+                new Fitness(user);
+            }
+        });
         goalsLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
