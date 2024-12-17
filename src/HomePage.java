@@ -43,6 +43,7 @@ public class HomePage {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                //homeFrame.setVisible(false);
                 //new Fitness();
             }
         });
@@ -52,6 +53,7 @@ public class HomePage {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                homeFrame.setVisible(false);
                 new FriendsPageFinal(user);
             }
         });
@@ -79,7 +81,8 @@ public class HomePage {
         goalsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //new Goals();
+                homeFrame.setVisible(false);
+                new FriendsPageFinal(user);
             }
         });
 

@@ -37,6 +37,7 @@ public class Menu {
     private JLabel HomeLogo;
     private JButton logOutButton;
     private JButton filterButton;
+    private JLabel goalsLabel;
     private int mealNum;
     private User user;
 
@@ -157,6 +158,14 @@ public class Menu {
             }
         });
 
+        goalsLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                MenuFrame.setVisible(false);
+                new FriendsPageFinal(user);
+            }
+        });
     }
 
     // Helper methods for meal data handling

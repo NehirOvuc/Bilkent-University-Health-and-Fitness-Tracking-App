@@ -1,8 +1,5 @@
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.util.List;
 import java.util.Map;
 
@@ -23,6 +20,9 @@ public class Goals {
     private JTextField BodyFat;
     private JTextField ActivityLevel;
     private JTextField gender;
+    private JLabel restaurantsLabel;
+    private JLabel fitnessLabel;
+    private JLabel goalsLabel;
     User user;
 
 
@@ -61,6 +61,31 @@ public class Goals {
         });
 
         // JFrame'i görünür yap
+        restaurantsLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                frame.setVisible(false);
+                new Restaurants(user);
+            }
+        });
+
+        fitnessLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                //frame.setVisible(false);
+                //new Fitness();
+            }
+        });
+        goalsLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                frame.setVisible(false);
+                new FriendsPageFinal(user);
+            }
+        });
         frame.setVisible(true);
     }
 
