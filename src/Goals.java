@@ -23,9 +23,11 @@ public class Goals {
     private JTextField BodyFat;
     private JTextField ActivityLevel;
     private JTextField gender;
+    User user;
 
 
-    public Goals() {
+    public Goals(User user) {
+        this.user = user;
         // JFrame oluştur ve Goals.form'u bağla
         JFrame frame = new JFrame("Goals");
         frame.setContentPane(panel1);
@@ -116,8 +118,5 @@ public class Goals {
         resultPanel.revalidate();
         resultPanel.repaint();
     }
-
-    public static void main(String[] args) {
-        new Goals();
-    }
 }
+
