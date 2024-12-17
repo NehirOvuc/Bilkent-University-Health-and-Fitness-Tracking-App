@@ -17,6 +17,7 @@ public class Goals {
     private JRadioButton femaleRadio;  // Kadın seçimi
     private JComboBox<String> activityComboBox; // Aktivite seviyesi
     private JLabel HomeLogo;           // Home butonu
+    private JButton logOutButton;
 
     public Goals() {
         // JFrame oluştur ve Goals.form'u bağla
@@ -40,6 +41,14 @@ public class Goals {
             public void mouseClicked(MouseEvent e) {
                 frame.setVisible(false); // Goals ekranını kapat
                 new UserLogin(frame); // Login ekranını aç
+            }
+        });
+
+        logOutButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                new UserLogin(frame);
             }
         });
 
