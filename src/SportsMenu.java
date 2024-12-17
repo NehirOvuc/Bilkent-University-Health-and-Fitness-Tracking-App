@@ -24,6 +24,8 @@ public class SportsMenu {
     private JComboBox HoursComboBox;
     private JButton addToTheGoalsButton;
     private JTextArea textAreaGoals;
+    private JLabel fitnessLabel;
+    private JLabel goalsLabel;
     private SportType running;
     private SportType swimming;
     private SportType weightlifting;
@@ -64,7 +66,7 @@ public class SportsMenu {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 SportsFrame.setVisible(false);
-                new Fitness(user);
+                new Restaurants(user);
             }
         });
         HomeLogo.addMouseListener(new MouseAdapter() {
@@ -72,7 +74,7 @@ public class SportsMenu {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 SportsFrame.setVisible(false);
-                new UserLogin(SportsFrame);
+                new HomePage(user);
             }
         });
         logOutButton.addActionListener(new ActionListener() {
@@ -116,6 +118,22 @@ public class SportsMenu {
                     textAreaGoals.setText("Successfully added to the goals list!");
                 }
 
+            }
+        });
+        fitnessLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                SportsFrame.setVisible(false);
+                new Fitness(user);
+            }
+        });
+        goalsLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                SportsFrame.setVisible(false);
+                new FriendsPageFinal(user);
             }
         });
     }

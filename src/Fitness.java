@@ -21,6 +21,7 @@ public class Fitness {
     private JLabel goalsLabel;
     private JLabel swimmingPhoto;
     private JLabel weightliftingPhoto;
+    private JLabel fitnessLabel;
     private JButton getMoreButtonWeightlifting;
     private User user;
 
