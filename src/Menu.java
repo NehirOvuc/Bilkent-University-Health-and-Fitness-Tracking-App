@@ -6,9 +6,9 @@ import java.io.File;
 
 public class Menu {
     private JCheckBox checkBox1;
-    private JTextField valueTextField;
+    private JTextField minValueTextField;
     private JPanel panel1;
-    private JTextField maxValue;
+    private JTextField maxValueTextField;
     private JTextArea mealDesc1;
     private JLabel mealTitle1;
     private JPanel m1p1;
@@ -36,17 +36,15 @@ public class Menu {
     private JLabel navRes;
     private JLabel HomeLogo;
     private JButton logOutButton;
+    private JButton filterButton;
+    private int mealNum;
+    private Boolean restricCalories;
 
     public Menu(String resName) {
+        restricCalories = checkBox1.isSelected();
+        mealNum = 5;
         TXThandler th = new TXThandler(resName);
         ArrayList<Meal> meals = th.meals;
-
-
-
-        for (int i = 0; i < Math.min(meals.size(), 5); i++) {
-            Meal m = meals.get(i);
-            setMealData(i, m, resName);
-        }
 
 
         resPhoto.setIcon(new ImageIcon("src/images/"+resName+"/"+Meal.getResPhoto()+".png"));
@@ -82,23 +80,24 @@ public class Menu {
         // Show the Restaurants frame
         MenuFrame.setVisible(true);
 
-        // Add mouse listeners for text fields to clear content when clicked
-        valueTextField.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                if (valueTextField.getText().equals("Enter value...")) {
-                    valueTextField.setText("");
-                }
-            }
-        });
-        maxValue.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                if (maxValue.getText().equals("Enter max value...")) {
-                    maxValue.setText("");
-                }
-            }
-        });
+//        // Add mouse listeners for text fields to clear content when clicked
+//        minValueTextField.addMouseListener(new MouseAdapter() {
+//            @Override
+//            public void mouseClicked(MouseEvent e) {
+//                if (minValueTextField.getText().equals("Enter value...")) {
+//                    minValueTextField.setText("");
+//                }
+//            }
+//        });
+//        maxValueTextField.addMouseListener(new MouseAdapter() {
+//            @Override
+//            public void mouseClicked(MouseEvent e) {
+//                if (maxValueTextField.getText().equals("Enter max value...")) {
+//                    maxValueTextField.setText("");
+//                }
+//            }
+//        });
+
         navRes.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -114,7 +113,7 @@ public class Menu {
                 super.mouseClicked(e);
                 MenuFrame.setVisible(false);
 
-                new UserLogin(MenuFrame);
+                new HomePage();
             }
         });
         logOutButton.addActionListener(new ActionListener() {
@@ -122,6 +121,39 @@ public class Menu {
             public void actionPerformed(ActionEvent e) {
                 MenuFrame.setVisible(false);
                 new UserLogin(MenuFrame);
+            }
+        });
+        filterButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int maxValue = 100000;
+                int minValue = 0;
+
+                String maxValueString = maxValueTextField.getText();
+                String minValueString = minValueTextField.getText();
+                if(maxValueString != null && minValueString != null) {
+                    try{
+                        maxValue = Integer.parseInt(maxValueString);
+                        minValue = Integer.parseInt(minValueString);
+                    }catch(NumberFormatException ex){
+                        JOptionPane.showMessageDialog(null, "Please enter a valid number");
+                    }
+                    if (minValue > maxValue) {
+                        JOptionPane.showMessageDialog(null, "Minimum number cannot be greater than maximum number");
+                    }
+                }
+
+                for (int i = 0; i < Math.min(meals.size(), 5); i++) {
+                    Meal m = meals.get(i);
+                    if (restricCalories){
+                        if((m.getMealCal() <= maxValue) && (m.getMealCal() >= minValue)){
+                            setMealData(i, m, resName);
+                        }
+                    }
+                    else{
+                        setMealData(i, m, resName);
+                    }
+                }
             }
         });
     }
