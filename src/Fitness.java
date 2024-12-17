@@ -31,7 +31,7 @@ public class Fitness {
         // Create a JFrame for the Restaurants page
         JFrame sportsFrame = new JFrame("Sports");
         sportsFrame.setContentPane(panel1);  // Set the panel as the content pane of the frame
-        sportsFrame.setSize(900, 900);
+        sportsFrame.setSize(900, 700);
         sportsFrame.setLocationRelativeTo(null);  // Center the frame on the screen
         sportsFrame.pack();
         sportsFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
