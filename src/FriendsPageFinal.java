@@ -29,8 +29,8 @@ public class FriendsPageFinal {
 
     // Database credentials
     private final String DB_URL = "jdbc:mysql://ndpm.asuscomm.com:46603/bhfdb";
-    private final String DB_USERNAME = "bhfapp"; // Updated to use dedicated user
-    private final String DB_PASSWORD = "SecurePassword123"; // Use a strong password
+    private final String DB_USERNAME = "root"; // Updated to use dedicated user
+    private final String DB_PASSWORD = "Bhf123"; // Use a strong password
 
     // List to hold friends
     private List<String> friendsList = new ArrayList<>();
@@ -144,9 +144,9 @@ public class FriendsPageFinal {
                 + "WHERE firstUser = ? OR secondUser = ?";
 
         try (PreparedStatement pstmt = conn.prepareStatement(query)) {
-            pstmt.setString(1, currentUser.getUserName());
-            pstmt.setString(2, currentUser.getUserName());
-            pstmt.setString(3, currentUser.getUserName());
+            pstmt.setString(1, currentUser.userName);
+            pstmt.setString(2, currentUser.userName);
+            pstmt.setString(3, currentUser.userName);
 
             try (ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
@@ -222,7 +222,7 @@ public class FriendsPageFinal {
                     return;
                 }
 
-                if (friendUsername.equals(currentUser.getUserName())) {
+                if (friendUsername.equals(currentUser.userName)) {
                     JOptionPane.showMessageDialog(addFriendDialog, "You cannot add yourself as a friend.",
                             "Error", JOptionPane.ERROR_MESSAGE);
                     return;
@@ -241,13 +241,13 @@ public class FriendsPageFinal {
                         return;
                     }
 
-                    if (isFriendshipExists(conn, currentUser.getUserName(), friendUsername)) {
+                    if (isFriendshipExists(conn, currentUser.userName, friendUsername)) {
                         JOptionPane.showMessageDialog(addFriendDialog, "You are already friends with this user.",
                                 "Information", JOptionPane.INFORMATION_MESSAGE);
                         return;
                     }
 
-                    addFriendship(conn, currentUser.getUserName(), friendUsername);
+                    addFriendship(conn, currentUser.userName, friendUsername);
                     JOptionPane.showMessageDialog(addFriendDialog, "Friend added successfully!",
                             "Success", JOptionPane.INFORMATION_MESSAGE);
 
@@ -309,7 +309,7 @@ public class FriendsPageFinal {
                     return;
                 }
 
-                if (friendUsername.equals(currentUser.getUserName())) {
+                if (friendUsername.equals(currentUser.userName)) {
                     JOptionPane.showMessageDialog(removeFriendDialog, "You cannot remove yourself.",
                             "Error", JOptionPane.ERROR_MESSAGE);
                     return;
@@ -328,13 +328,13 @@ public class FriendsPageFinal {
                         return;
                     }
 
-                    if (!isFriendshipExists(conn, currentUser.getUserName(), friendUsername)) {
+                    if (!isFriendshipExists(conn, currentUser.userName, friendUsername)) {
                         JOptionPane.showMessageDialog(removeFriendDialog, "You are not friends with this user.",
                                 "Information", JOptionPane.INFORMATION_MESSAGE);
                         return;
                     }
 
-                    removeFriendship(conn, currentUser.getUserName(), friendUsername);
+                    removeFriendship(conn, currentUser.userName, friendUsername);
                     JOptionPane.showMessageDialog(removeFriendDialog, "Friend removed successfully!",
                             "Success", JOptionPane.INFORMATION_MESSAGE);
 
@@ -466,26 +466,26 @@ public class FriendsPageFinal {
     }
 
 
-//    public static void main(String[] args) {
+    public static void main(String[] args) {
+
+////
+//        // For testing, create a dummy user
 //
-////
-////        // For testing, create a dummy user
-////
-////        User newUser = new User();
-////        newUser.userName = "niir";
-////        newUser.password = "niir.123";
-////        newUser.gender = "Female";
-////        newUser.age = 20;
-////        newUser.height = 158;
-////        newUser.weight = 45000;
-////        newUser.bFPercentage = 20;
-////
-////        SwingUtilities.invokeLater(new Runnable() {
-////            @Override
-////            public void run() {
-////                new FriendsPageFinal(newUser);
-////            }
-////        });
-////        new FriendsPageFinal(null);
-//    }
+//        User newUser = new User();
+//        newUser.userName = "niir";
+//        newUser.password = "niir.123";
+//        newUser.gender = "Female";
+//        newUser.age = 20;
+//        newUser.height = 158;
+//        newUser.weight = 45000;
+//        newUser.bFPercentage = 20;
+//
+//        SwingUtilities.invokeLater(new Runnable() {
+//            @Override
+//            public void run() {
+//                new FriendsPageFinal(newUser);
+//            }
+//        });
+      new FriendsPageFinal(null);
+  }
 }
