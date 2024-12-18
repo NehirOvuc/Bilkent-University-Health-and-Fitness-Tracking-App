@@ -47,7 +47,7 @@ public class Goals {
             @Override
             public void mouseClicked(MouseEvent e) {
                 frame.setVisible(false); // Goals ekranını kapat
-                new UserLogin(frame); // Login ekranını aç
+                new HomePage(user); // Login ekranını aç
             }
         });
 

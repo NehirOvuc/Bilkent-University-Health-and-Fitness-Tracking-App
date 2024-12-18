@@ -76,7 +76,9 @@ public class Registration extends JDialog {
             }
             user = addUserToDatabase(userName, password, gender, age, height, weight, bFPercentage);
             if (user != null){
+                JFrame frame = new JFrame();
                 dispose();
+                new UserLogin(frame);
             }
             else{
                 JOptionPane.showMessageDialog(null, "Failed to register new user");
